@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Study Planner</title>
+  <link rel="stylesheet" href="My_Study_Planner.css">
+</head>
+<body>
+  <h1>My Study Planner</h1>
+
+  <label for="taskInput">Study Task</label>
+  <input id="taskInput" type="text" placeholder="Enter a study task">
+  <button id="addBtn">Add Task</button>
+
+  <div id="taskFilters">
+    <button type="button" data-filter="all">All</button>
+    <button type="button" data-filter="pending">Pending</button>
+    <button type="button" data-filter="completed">Completed</button>
+  </div>
+
+  <ul id="taskList"></ul>
+
+  <p id="message"></p>
+
+  <script src="My_Study_Planner.js" defer></script>
+</body>
+</html>

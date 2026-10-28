@@ -1,0 +1,8 @@
+#taskList li {
+  margin: 8px 0;
+}
+
+.completed span {
+  text-decoration: line-through;
+  opacity: 0.6;
+}
