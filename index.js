@@ -2,7 +2,17 @@ const input = document.getElementById("taskInput");
 const button = document.getElementById("addBtn");
 const list = document.getElementById("taskList");
 const message = document.getElementById("message");
-let tasks = JSON.parse(localStorage.getItem("studyTasks")) || [];
+
+let tasks = [];
+
+try {
+  const saveTasks = localStorage.getItem("studyTasks");
+  tasks = saveTasks ? JSON.parse(saveTasks) : [];
+} catch (error) {
+  tasks = [];
+  console.error("Failed to load saved tasks", error);
+}
+
 let currentFilter = "all";
 
 function saveTasks() {
