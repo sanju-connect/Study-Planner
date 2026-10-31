@@ -6,8 +6,21 @@ const message = document.getElementById("message");
 let tasks = [];
 
 try {
-  const saveTasks = localStorage.getItem("studyTasks");
-  tasks = saveTasks ? JSON.parse(saveTasks) : [];
+  const savedTasks = localStorage.getItem("studyTasks");
+  const parsedTasks = JSON.parse(savedTasks);
+
+  if(Array.isArray(parsedTasks)) {
+    tasks = parsedTasks.filter(function(task) {
+      return (
+        task != null &&
+        typeof task === "object" &&
+        !Array.isArray(task) &&
+        typeof task.id === "number" &&
+        typeof task.text === "string" &&
+        typeof task.completed === "boolean"
+      );
+    });
+  }
 } catch (error) {
   tasks = [];
   console.error("Failed to load saved tasks", error);
