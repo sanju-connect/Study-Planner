@@ -2,6 +2,7 @@ const input = document.getElementById("taskInput");
 const button = document.getElementById("addBtn");
 const list = document.getElementById("taskList");
 const message = document.getElementById("message");
+const loadSampleBtn = document.getElementById("loadSampleBtn");
 
 let tasks = [];
 
@@ -167,6 +168,26 @@ button.addEventListener("click", function() {
 
   input.value = "";
   message.textContent = "";
+});
+
+loadSampleBtn.addEventListener("click", function() {
+  message.textContent = "Loading sample task...";
+
+  fetch("https://jsonplaceholder.typicode.com/todos/1")
+    .then(function(response) {
+      if (!response.ok) {
+        throw new Error("Failed to Fetch sample task");
+      }
+      return response.json();
+    })
+    .then(function(data) {
+      input.value = data.title;
+      message.textContent = "Sample task loaded successfully";
+    })
+    .catch(function(error) {
+      message.textContent = "Could not load sample task. Please try again.";
+      console.error("API error:", error);
+    });
 });
 
 renderTasks();
