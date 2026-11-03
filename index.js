@@ -170,24 +170,24 @@ button.addEventListener("click", function() {
   message.textContent = "";
 });
 
-loadSampleBtn.addEventListener("click", function() {
+loadSampleBtn.addEventListener("click", async function() {
   message.textContent = "Loading sample task...";
 
-  fetch("https://jsonplaceholder.typicode.com/todos/1")
-    .then(function(response) {
-      if (!response.ok) {
-        throw new Error("Failed to Fetch sample task");
-      }
-      return response.json();
-    })
-    .then(function(data) {
-      input.value = data.title;
-      message.textContent = "Sample task loaded successfully";
-    })
-    .catch(function(error) {
-      message.textContent = "Could not load sample task. Please try again.";
-      console.error("API error:", error);
-    });
+  try {
+    const response =  await fetch("https://jsonplaceholder.typicode.com/todos/1");
+
+  if (!response.ok) {
+    throw new Error("Failed to fetch samplew task");
+  }
+
+  const data = await response.json();
+
+  input.value = data.title;
+  message.textContent = "Sample task loaded successfully!";
+} catch (error) {
+  message.textContent = "Could not load sample task. Please try again.";
+  console.error("API error.", error);
+}
 });
 
 renderTasks();
